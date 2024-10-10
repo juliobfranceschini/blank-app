@@ -6,16 +6,6 @@ def carregar_planilha(uploaded_file):
     df = pd.read_excel(uploaded_file)
     return df
 
-# Função para calcular a média e mediana das colunas "Taxa de compra" e "Taxa indicativa"
-def calcular_estatisticas(df):
-    media_taxa_compra = df['Taxa de compra'].mean()
-    mediana_taxa_compra = df['Taxa de compra'].median()
-
-    media_taxa_indicativa = df['Taxa indicativa'].mean()
-    mediana_taxa_indicativa = df['Taxa indicativa'].median()
-
-    return media_taxa_compra, mediana_taxa_compra, media_taxa_indicativa, mediana_taxa_indicativa
-
 # Título do dashboard
 st.title("Dashboard de Debêntures")
 
@@ -50,17 +40,10 @@ if uploaded_file is not None:
 
                 # Exibir as colunas relevantes (incluindo a nova coluna 'Duration (em anos)')
                 st.write(debenture_dados[['Remuneração', 'Tipo Remuneração', 'Taxa de compra', 'Duration (em anos)']])
-
-                # Calcular a média e mediana e exibir os resultados
-                media_taxa_compra, mediana_taxa_compra, media_taxa_indicativa, mediana_taxa_indicativa = calcular_estatisticas(debenture_dados)
-                st.write("### Estatísticas:")
-                st.write(f"Média da Taxa de Compra: {media_taxa_compra:.2f}")
-                st.write(f"Mediana da Taxa de Compra: {mediana_taxa_compra:.2f}")
-                st.write(f"Média da Taxa Indicativa: {media_taxa_indicativa:.2f}")
-                st.write(f"Mediana da Taxa Indicativa: {mediana_taxa_indicativa:.2f}")
             else:
                 st.write("Nenhuma informação disponível para essa combinação de código e data.")
         else:
             st.write("Nenhuma debênture encontrada com o código fornecido.")
 else:
     st.write("Por favor, carregue um arquivo Excel para buscar as informações.")
+
