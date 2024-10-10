@@ -16,14 +16,14 @@ def filtrar_debenture(df, codigo_debenture, data_ref=None):
 
     return df_filtrado
 
-# Caminho do arquivo Excel
-caminho_arquivo = "debentures-precos-07-10-2024-13-59-00.xls"
+# Caminho do arquivo Excel (você pode alterar para o caminho correto)
+caminho_arquivo = "/content/debentures-precos-07-10-2024-13-59-00.xls"
 
 # Carregar a planilha
 df = carregar_planilha(caminho_arquivo)
 
 # Ajustar as opções de exibição para ver todas as colunas no Streamlit (caso queira ver os dados brutos)
-pd.set_option("display.max_columns", None)
+pd.set_option("display.max_columns", None)  # Mostrar todas as colunas
 
 # Título do dashboard
 st.title("Dashboard de Debêntures")
@@ -57,9 +57,3 @@ if codigo_debenture:
         st.write("Nenhuma debênture encontrada com o código fornecido.")
 else:
     st.write("Por favor, insira o código da debênture para buscar as informações.")
-
-# Adicionar opção para exportar os dados filtrados
-if not df_filtrado.empty:
-    df_filtrado.to_excel('df_combinado.xlsx', index=False)
-    with open('df_combinado.xlsx', 'rb') as f:
-        st.download_button('Baixar dados em Excel', f, file_name='df_combinado.xlsx')
